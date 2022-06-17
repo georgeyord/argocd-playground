@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: echo-server
+  namespace: samples
+spec:
+  project: default
+  source:
+    repoURL: 'https://ealenn.github.io/charts'
+    targetRevision: 0.4.0
+    helm:
+      values: |-
+        ingress:
+          enabled: true
+          hosts:
+          - host: test3.k8s.32.lan.parthenon.yord.xyz
+            paths:
+            - "/"
+    chart: echo-server
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: samples
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=background
