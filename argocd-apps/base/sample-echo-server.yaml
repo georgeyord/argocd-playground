@@ -13,7 +13,7 @@ spec:
         ingress:
           enabled: true
           hosts:
-          - host: test3.k8s.32.lan.parthenon.yord.xyz
+          - host: test3.lan
             paths:
             - "/"
     chart: echo-server
